@@ -13,6 +13,17 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.9
+
+- **Three passages restated an idea instead of carrying it.** "A diff reviewer
+  compares what a change became against what it replaced" — true and useless
+  without the consequence; "the two things that make it executable rather than
+  informative" — a claim about the file rather than what is in it; "split it
+  along a seam that already exists" — a seam in what. All three now carry the
+  example: a script untouched for six months gives a diff reviewer nothing to
+  look at; the invariants are quoted lines like "the hook fails open"; the seam
+  is `bin/tool` apart from `bin/tool.ps1`.
+
 ## 1.0.8
 
 - **Nothing said what to do with the file.** Both READMEs described what a pass

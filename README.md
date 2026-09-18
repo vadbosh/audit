@@ -42,10 +42,10 @@ skill:  Using audit on bin/mytool — findings go to review-2026-09-18-mytool.md
 | a pull request, a branch to merge, a diff | whatever reviews diffs in your assistant — those tools take the changed lines as their input |
 | a tool, a script, a config tree, a document set on disk | the `audit` skill |
 
-A diff reviewer compares what a change became against what it replaced, which
-is a different question from whether the thing works at all. It also has no
-input when nothing has changed — the ordinary state of a tool somebody wrote
-once and has used ever since.
+A diff reviewer answers "what did this change break". `audit` answers a
+different question: "does this thing work at all". A script written six months
+ago and untouched since gives a diff reviewer nothing to look at — and usually
+has plenty to find.
 
 **`audit` runs in one session and spawns no subagents.** Diff reviewers usually
 split the work across parallel agents; this one does not, because every spawn
@@ -66,10 +66,17 @@ One Markdown file, in sections named after consequences rather than topics:
 | **What is NOT a defect** | examined and found correct, so the next reader does not spend the time again |
 | **Done when** | acceptance commands, each with the exit status it should have |
 
-Plus the two things that make it executable rather than informative: the
-**invariants** a fix may not break, quoted from what the project says about
-itself, and a **fix order** saying which items share a code path and what stays
-open while the rest land.
+Beyond the findings the file carries two lists, and without them nobody can
+work from it.
+
+**Invariants** — what a fix may not break, quoted from the project's own words:
+"the hook fails open", "both ports carry one policy". Without that list, a fix
+that closes a hole by refusing to run looks like a success.
+
+**Fix order** — which items touch the same code and are done together, which
+goes first, and whose reproductions to re-run afterwards. It also says what
+stays broken meanwhile: the worst finding usually has to go last, because
+everything else would otherwise be re-applied to rewritten code.
 
 ## The file is a work order, handed to whoever fixes
 
@@ -109,8 +116,12 @@ for in its second line.
   it is new, so no probe script ever needs an `rm`.
 - **Stay inside the project.** Another project on this machine is not evidence
   about this one.
-- **One object per pass**, and past roughly 600 lines of code, split it along a
-  seam that already exists — implementation and port, library and driver.
+- **One object per pass.** Past roughly 600 lines the object is split along a
+  seam already in it: `bin/tool` apart from its port `bin/tool.ps1`, a library
+  apart from the command that drives it. A pass over 1200 lines takes three
+  times as long as one over 400 and returns smaller findings, because the
+  attention goes on breadth. The port gets its own pass, and that one starts as
+  a parity check — the same inputs through both, the differences listed.
 
 ## Install
 
