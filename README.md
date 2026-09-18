@@ -87,12 +87,12 @@ One Markdown file, in sections named after consequences rather than topics:
 
 | Section | The question |
 |---|---|
-| **A. Defects** | what does the wrong thing — each with the command that reproduces it, a class (silent wrong result / visible failure / damage), the blast radius of the fix, and which test closes it |
-| **B. Documentation** | where the text and the code disagree |
-| **C. Efficiency** | what costs too much — only with a number a command printed |
-| **D. Judgement** | what is right and must stay, what is arguable; proposals, not tasks |
-| **What is NOT a defect** | examined and found correct, so the next reader does not spend the time again |
-| **Done when** | acceptance commands, each with the exit status it should have |
+| **A. Defects** | what is broken: the command that shows it; how bad — wrong in silence, broken loudly, damage done; what changes together; what closes it |
+| **B. Documentation** | the README promises one thing, the code does another |
+| **C. Cost** | how much time and memory it eats — from a command's numbers, not by eye |
+| **D. Decisions** | what to leave alone, what is arguable — proposals for the author, not tasks |
+| **What is NOT a defect** | checked, and fine — so nobody checks it again |
+| **Done when** | the commands that prove it, and the exit code to expect from each |
 
 Beyond the findings the file carries two lists, and without them nobody can
 work from it.

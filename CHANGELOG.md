@@ -13,6 +13,16 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.20
+
+- **The table of sections read like a specification.** "what does the wrong
+  thing — each with the command that reproduces it, a class (silent wrong
+  result / visible failure / damage), the blast radius of the fix" put three
+  pieces of jargon in one cell, one of them untranslated in the Russian version.
+  Every row is now a phrase somebody would say out loud: what is broken and how
+  bad, the README promising one thing while the code does another, how much time
+  and memory it eats, what to leave alone.
+
 ## 1.0.19
 
 - **The fourth question grew into a paragraph of examples with nothing behind
