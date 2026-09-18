@@ -1,0 +1,112 @@
+# audit
+
+A skill for reviewing something that is **already written and sitting on disk** —
+a tool, a script, a configuration tree, a set of documents — and writing the
+findings to one file: `review-YYYY-MM-DD-<object>.md` at the project root.
+
+It fixes nothing. Reviewing and repairing are different jobs, and a pass that
+starts fixing stops looking at item three.
+
+```
+you:    /audit bin/mytool
+skill:  Using audit on bin/mytool — findings go to review-2026-09-18-mytool.md
+        … baseline, probes, reproductions …
+        A: 7, B: 3, C: 4, D: 4 open questions. Nothing was fixed.
+```
+
+## When this, and when not
+
+| Situation | Use |
+|---|---|
+| a pull request, a diff, a branch to merge | a PR-review tool — they are built on `gh pr diff` |
+| a tool, a script, a config tree, a document set on disk | this |
+
+The PR-shaped reviewers spawn a fan-out of agents per run. That earns its cost
+on a diff with owners and history; it has no input at all when there is no pull
+request, which is the ordinary case for a personal tool. **This skill is one
+session and no subagents.** If a pass seems to need a fan-out, the object is too
+big — review one part of it and say which part.
+
+## What a pass produces
+
+One Markdown file, in sections named after consequences rather than topics:
+
+| Section | The question |
+|---|---|
+| **A. Defects** | what does the wrong thing — each with the command that reproduces it, a class (silent wrong result / visible failure / damage), the blast radius of the fix, and which test closes it |
+| **B. Documentation** | where the text and the code disagree |
+| **C. Efficiency** | what costs too much — only with a number a command printed |
+| **D. Judgement** | what is right and must stay, what is arguable; proposals, not tasks |
+| **What is NOT a defect** | examined and found correct, so the next reader does not spend the time again |
+| **Done when** | acceptance commands, each with the exit status it should have |
+
+Plus the two things that make it executable rather than informative: the
+**invariants** a fix may not break, quoted from what the project says about
+itself, and a **fix order** saying which items share a code path and what stays
+open while the rest land.
+
+## The rules it holds itself to
+
+- **Reproduce before claiming.** No command, no finding.
+- **Run it on the broken input.** A check never executed against the failure it
+  describes has not been checked.
+- **A quote from documentation is a hypothesis.** Where a finding's severity
+  rests on how a host or runtime behaves, that behaviour is shown on this
+  machine or the item says it is unverified.
+- **Read verdicts from the exit status.** A session runs inside hooks and
+  wrappers that rewrite output; when the object is the same kind of thing, the
+  screen proves nothing.
+- **Sandbox from `mktemp -d`, delete nothing.** Every iteration is clean because
+  it is new, so no probe script ever needs an `rm`.
+- **Stay inside the project.** Another project on this machine is not evidence
+  about this one.
+- **One object per pass**, and past roughly 600 lines of code, split it along a
+  seam that already exists — implementation and port, library and driver.
+
+## Install
+
+```bash
+git clone <this repository> audit && cd audit
+./install.sh                 # every assistant found: Claude Code, Opencode, Codex
+./install.sh --dry-run       # print what would happen, change nothing
+./install.sh --skills-dir D  # install into D instead of auto-detecting
+```
+
+Windows: `.\install.ps1`, same flags.
+
+The skill is three Markdown files. There is no binary, nothing goes on `PATH`,
+and nothing outside `$HOME` is touched. Re-running replaces only what changed; a
+file it overwrites is backed up only when that exact content is not already in
+this repository — a hand edit is the one thing git cannot give back.
+
+Uninstall: delete `<skills-dir>/audit`.
+
+## Layout
+
+```
+skills/audit/SKILL.md              the pass itself — what to do, in what order
+skills/audit/references/
+    template.md                    the skeleton of the review file, slot by slot
+    domains.md                     shapes that keep being missed, per domain
+install.sh / install.ps1           copy into each assistant's skills directory
+release.sh                         version ↔ changelog ↔ tag ↔ HEAD ↔ copies
+CHANGELOG.md                       what changed in each version
+```
+
+The two reference pages load **on demand** — `template.md` when the file is
+being written, `domains.md` only when the object is one of the kinds it covers.
+An ordinary pass pays for neither.
+
+## Releasing
+
+```bash
+./release.sh check     # version ↔ changelog ↔ tag ↔ HEAD ↔ installed copies
+./release.sh tag       # create the tag, carrying the changelog section
+```
+
+`check` compares every installed copy against the source **file by file**, asking
+the source what it ships rather than trusting a list written by hand.
+
+## Russian
+
+[README.RU.md](README.RU.md).
