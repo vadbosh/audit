@@ -13,6 +13,14 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.19
+
+- **The fourth question grew into a paragraph of examples with nothing behind
+  them.** "A fixed list of labels" — labels of what, in whose tool. Cut to one
+  case a reader can picture: five named commands may read a secret file, and
+  `sort .env` is not among them, so it reads it freely. Not a defect, a choice
+  with a price; the audit names the price, the author decides.
+
 ## 1.0.18
 
 - **The four questions were labels, not explanations.** They named what a pass

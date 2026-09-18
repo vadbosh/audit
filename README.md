@@ -31,13 +31,10 @@ questions, in this order:
    work stops happening is a defect.
 
 4. **Which decisions are worth discussing?**
-   These are not defects: the code does exactly what it was meant to — the
-   intent is what is arguable. Say the tool lists the commands allowed to read
-   secret files, and everything else passes unquestioned. Or the list of labels
-   like `password` and `token` is fixed, and a new one is added only after
-   something leaked. The author pays for such a choice and knows why it ended up
-   that way. So these arrive as proposals with the price named, and the author
-   decides.
+   The code does what it was meant to — the intent is the question. For example:
+   five named commands may read a secret file, and `sort .env` is not on the
+   list, so it reads it freely. That is not a defect, it is a choice with a
+   price. The audit names the price; the author decides.
 
 Every finding carries the command that reproduces it, run on the broken input.
 A finding without one is a guess, and guesses are cheap to write and expensive
