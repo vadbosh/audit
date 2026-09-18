@@ -13,6 +13,17 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.14
+
+- **"When `audit`, and when a diff reviewer" answered the wrong question.** It
+  compared two kinds of tool while the reader wanted to know when they would
+  reach for this one, and who reaches — nothing here watches a repository or
+  runs on a schedule. The section is "When you run it" now, and names the five
+  occasions: picking up a tool you do not know what to trust in, changing a part
+  untouched for months, odd behaviour with no commits behind it, surroundings
+  that moved, handing the tool to somebody else. The comparison with diff
+  reviewers follows as the reason those occasions have no diff to show.
+
 ## 1.0.13
 
 - **Shorter sentences, same facts.** The Russian version had one of 47 words and

@@ -35,24 +35,35 @@ skill:  Using audit on bin/mytool — findings go to review-2026-09-18-mytool.md
         A: 7, B: 3, C: 4, D: 4 open questions. Nothing was fixed.
 ```
 
-## When `audit`, and when a diff reviewer
+## When you run it
+
+You do, by hand, when you decide to. The skill watches no repository, runs on no
+schedule and reminds you of nothing. The occasions it actually gets called for:
+
+- **you are picking up a tool** — somebody else's, or your own from a year ago —
+  and do not know what in it to trust;
+- **you are about to change a part** nobody has touched in months;
+- **something started behaving oddly** and there were no commits;
+- **the surroundings moved** — a runtime version, an input format, a
+  neighbouring service — and it is unclear what survived;
+- **you are handing the tool to others**: publishing it, passing it to a
+  colleague, putting it somewhere shared.
+
+What the five have in common: no changes, plenty of questions. A diff reviewer
+looks at what a change broke, and here nothing was changed. The code sat still
+while library versions, input formats, neighbouring services and host limits
+moved around it. The debt is there, the commits are not, and a diff reviewer has
+nothing to look at. One way to see it: run today's inputs through the code.
 
 | Situation | Use |
 |---|---|
-| a pull request, a branch to merge, a diff | whatever reviews diffs in your assistant — those tools take the changed lines as their input |
+| a pull request, a branch to merge, a diff | whatever reviews diffs in your assistant |
 | a tool, a script, a config tree, a document set on disk | the `audit` skill |
-
-A diff reviewer looks at what a change broke. `audit` looks at whether the code
-still works. Code sits unchanged for a year while everything around it moves:
-library versions, input formats, neighbouring services, host limits. No commits,
-so a diff reviewer has nothing to look at. The debt is there anyway. One way to
-find it: run today's inputs through the code.
 
 **`audit` runs in one session and spawns no subagents.** Diff reviewers usually
 split the work across parallel agents; this one does not, because every spawn
-loads its context from nothing. If the object is big enough that a pass would
-need parallel agents, the skill reviews one part of it and says which part in
-its opening line.
+loads its context from nothing. If the object is too big for one session, the
+skill takes one part of it and says which in its opening line.
 
 ## What a pass produces
 
