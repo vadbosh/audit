@@ -1,8 +1,26 @@
 # audit
 
-A skill for reviewing something that is **already written and sitting on disk** —
-a tool, a script, a configuration tree, a set of documents — and writing the
-findings to one file: `review-YYYY-MM-DD-<object>.md` at the project root.
+A skill that audits something **already written and in use** — a tool, a script,
+a configuration tree, a set of documents — and writes the findings to one file:
+`review-YYYY-MM-DD-<object>.md` at the project root.
+
+**An audit of what, exactly.** Not security, not style, not a diff. Four
+questions, in this order:
+
+1. **Does it do what it promises?** Fed the inputs its author did not have in
+   mind — another syntax, a value crossing a line break, a limit reached — does
+   it still answer correctly, or does it answer wrongly and say nothing?
+2. **Does its documentation describe the code that is there?** A README
+   promising a behaviour the code lost two releases ago is worse than no README:
+   it is what somebody checks before deciding not to look further.
+3. **What does it cost, measured?** Not "could be faster" — a number a command
+   printed, and the size at which that number starts to hurt.
+4. **Which of its decisions are worth questioning?** Named as proposals for the
+   author, never as tasks.
+
+Every finding carries the command that reproduces it, run on the broken input.
+A finding without one is a guess, and guesses are cheap to write and expensive
+to read.
 
 The skill fixes nothing. Reviewing and repairing are different jobs: a pass that
 stops to fix its first finding stops looking for the rest, and never reaches a

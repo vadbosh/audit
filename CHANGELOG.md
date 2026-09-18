@@ -13,6 +13,17 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.6
+
+- **Both READMEs said what the skill reviews and never what it asks.** "A skill
+  for reviewing something already written" leaves the reader to guess whether
+  this is a security review, a style pass or a diff reviewer — and the guess
+  costs a run to correct. The opening now states the four questions in order:
+  does it do what it promises on inputs nobody had in mind, does the
+  documentation describe the code that is there, what does it cost by
+  measurement, which decisions are worth questioning. The repository
+  description says the same in one sentence.
+
 ## 1.0.5
 
 - **The review file came out named `review-2026-09-18-up.sh.md`.** Run against
