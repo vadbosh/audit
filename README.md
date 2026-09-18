@@ -51,7 +51,7 @@ skill:  Using audit on bin/mytool — findings go to review-2026-09-18-mytool.md
         A: 7, B: 3, C: 4, D: 4 open questions. Nothing was fixed.
 ```
 
-## When you run it
+## When you run audit
 
 You do, by hand, when you decide to. The skill watches no repository, runs on no
 schedule and reminds you of nothing. The occasions it actually gets called for:

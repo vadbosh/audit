@@ -13,6 +13,14 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.23
+
+- Заголовок раздела о поводах для прогона назван предметом: «Когда это
+  запускают» → «Когда запускают audit», «When you run it» → «When you run
+  audit». Заголовок читают из оглавления, где предыдущей строки нет, и «это»
+  оттуда не значит ничего. Нашла проверка «Заголовок называет предмет» из
+  скила `ru-tech-docs`. Якорей на прежний текст не было.
+
 ## 1.0.22
 
 - "сколько ест времени и памяти" — a tool consumes, it does not eat. Same word
