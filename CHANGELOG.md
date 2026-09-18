@@ -13,6 +13,16 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.8
+
+- **Nothing said what to do with the file.** Both READMEs described what a pass
+  produces and stopped there, leaving the obvious next step — hand it to another
+  assistant, or to this one in a fresh session, and have it work through the
+  items — as something the reader had to think of. Said now, with the sentence
+  to paste, and with why the split is the point: a session that reviewed the
+  code already believes its own reading of it, while a session holding only the
+  file has to reproduce each claim before acting on it.
+
 ## 1.0.7
 
 - **The Russian opening was a translation, not a sentence.** "то, что уже

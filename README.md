@@ -71,6 +71,29 @@ Plus the two things that make it executable rather than informative: the
 itself, and a **fix order** saying which items share a code path and what stays
 open while the rest land.
 
+## The file is a work order, handed to whoever fixes
+
+The pass and the repair are done by different sessions on purpose, and the file
+is what passes between them. Hand it to another assistant, or to the same one in
+a fresh session:
+
+```
+Work through review-2026-09-18-mytool.md. Reproduce each item before fixing it,
+in the order the file gives, and run the acceptance commands at the end.
+```
+
+Nothing else has to travel with it. Each item carries the command that
+reproduces the defect, the fix stated as a change rather than an intention, the
+files that change together, and the test that closes it; the file as a whole
+carries the invariants a fix may not break, the order the items must be done in,
+and the acceptance commands with the exit status each should return. A fixer who
+was not in the reviewing session needs none of its context.
+
+That separation is the point, not a limitation. A session that reviewed the code
+already believes its own reading of it; a session that only has the file has to
+reproduce each claim before acting on it — which is exactly what the file asks
+for in its second line.
+
 ## The rules it holds itself to
 
 - **Reproduce before claiming.** No command, no finding.
