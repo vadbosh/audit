@@ -13,6 +13,16 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.1.1
+
+- **The glued-flag family, in `references/domains.md`.** A label rule is written
+  as "label, separator, value", and the separator is assumed — but
+  `mysql -p<password>`, `redis-cli -a <password>`, `smbclient -U user%password`
+  and `curl -u user:password` have none. Ten idioms probed on a live redactor,
+  three missed. Recorded with the trap that comes with the fix: those flag
+  letters mean other things elsewhere, so the rule is gated on the command that
+  owns the idiom or it starts masking `ls -p` and `sort -u`.
+
 ## 1.1.0
 
 - **Auditing a document is a new section, and it is about running the document
