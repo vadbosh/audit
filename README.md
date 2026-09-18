@@ -4,7 +4,7 @@ A skill for reviewing something that is **already written and sitting on disk** 
 a tool, a script, a configuration tree, a set of documents — and writing the
 findings to one file: `review-YYYY-MM-DD-<object>.md` at the project root.
 
-It fixes nothing. Reviewing and repairing are different jobs, and a pass that
+The skill fixes nothing. Reviewing and repairing are different jobs, and a pass that
 starts fixing stops looking at item three.
 
 ```
@@ -14,18 +14,18 @@ skill:  Using audit on bin/mytool — findings go to review-2026-09-18-mytool.md
         A: 7, B: 3, C: 4, D: 4 open questions. Nothing was fixed.
 ```
 
-## When this, and when not
+## When `audit`, and when a pull-request reviewer
 
 | Situation | Use |
 |---|---|
-| a pull request, a diff, a branch to merge | a PR-review tool — they are built on `gh pr diff` |
+| a pull request, a branch to merge, a diff | a pull-request reviewer — they are built on `gh pr diff` |
 | a tool, a script, a config tree, a document set on disk | this |
 
-The PR-shaped reviewers spawn a fan-out of agents per run. That earns its cost
-on a diff with owners and history; it has no input at all when there is no pull
+Pull-request reviewers spawn several agents in parallel per run. That earns its
+cost on a diff with owners and history; it has no input at all when there is no pull
 request, which is the ordinary case for a personal tool. **This skill is one
-session and no subagents.** If a pass seems to need a fan-out, the object is too
-big — review one part of it and say which part.
+session and no subagents.** If a pass seems to need parallel agents, the object
+is too big — review one part of it and say which part.
 
 ## What a pass produces
 
