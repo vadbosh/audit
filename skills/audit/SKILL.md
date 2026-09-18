@@ -1,7 +1,7 @@
 ---
 name: audit
 description: Review a tool, script, config set or document set that already exists on disk, and write the findings to review-YYYY-MM-DD-<object>.md. Handles "сделай ревью", "пройдись по коду", "cold review", "проверь этот инструмент целиком", "audit this", and additions to a review that exists — "допиши в ревью", "добавь пункт", "add this finding to the review". Each finding carries the command that reproduces it. One session, no agent fan-out. Not for a pull request or a diff — those have reviewers of their own, built on the diff.
-version: "1.0.23"
+version: "1.1.0"
 ---
 
 # audit
@@ -237,6 +237,45 @@ Get those shapes from the object's own domain — the format it parses, the
 specification it implements, the fixtures its tests already carry — and not
 from memory. Domains where the same shapes keep recurring have a page:
 `references/domains.md`, loaded only when the object is one of them.
+
+## Auditing a document: run every claim through the program
+
+When the object is documentation, the temptation is to read it against the
+source and report where words and code disagree. That finds typos. The pass that
+finds defects turns each claim into a command and runs it.
+
+The mechanics are cheap. A list of formats becomes one synthetic value per row,
+fed to the program, verdict read from the exit status. A list of paths becomes
+one invocation per path. A sentence saying "X is denied, Y is allowed" becomes
+two runs. Twenty claims are one loop and one table to read.
+
+**Two kinds of finding come out, and the second is the reason to do it:**
+
+- the document is wrong about the program — ordinary, repaired by editing text;
+- **the program is wrong, and the document was right about what it should do.**
+  The author wrote the intended behaviour down and then implemented a narrower
+  one. Nobody re-read the sentence afterwards, because prose is not tested.
+
+Measured on two document pairs in one afternoon: both passes began as
+documentation reviews and both ended as code fixes. A store list read `*.env`
+while the guard denied only a bare `.env`, so `cat prod.env` printed the file. A
+reader list held fourteen pagers and no extractors, so
+`grep . ~/.aws/credentials` printed the file — while the same machine's standing
+rules told the assistant to prefer `grep` for reading file content. Neither is
+visible from either side alone; both take one command to show.
+
+Three habits that make it work:
+
+- **Take the claims a command can settle** — a list, a threshold, a promise of
+  the form "this is covered". Leave the reasoning to `D`.
+- **Cover both directions.** What the document says is caught, and what it says
+  is deliberately left alone. The second half is where a too-wide rule surfaces,
+  and a document that names its exemptions is handing you the cases.
+- **Substitute carefully, then check the substitution.** A path written `*.env`
+  or `/proc/*/environ` in prose is a shape, not a path; feeding it verbatim
+  produces a row of false "not denied" results — ten of them in one pass here,
+  all from `*` replaced by a letter. Re-run every failure with a real spelling
+  before writing any of it down.
 
 ## What a pass costs, and where it goes
 
