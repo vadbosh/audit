@@ -13,6 +13,16 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.12
+
+- **Why a diff reviewer has nothing to show, said plainly.** The old wording —
+  "a script written six months ago gives a diff reviewer nothing to look at, and
+  usually has plenty to find" — stated the outcome without the cause. The cause
+  is that code stands still while its surroundings move: dependency versions,
+  the shape of its input, the services next to it, the limits of its host. The
+  debt accumulates with no commits carrying it, which is exactly why the only
+  way to see it is to run today's inputs through the code.
+
 ## 1.0.11
 
 - **"The budget for care is spent on breadth" explained nothing**, and the

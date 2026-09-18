@@ -43,9 +43,12 @@ skill:  Using audit on bin/mytool — findings go to review-2026-09-18-mytool.md
 | a tool, a script, a config tree, a document set on disk | the `audit` skill |
 
 A diff reviewer answers "what did this change break". `audit` answers a
-different question: "does this thing work at all". A script written six months
-ago and untouched since gives a diff reviewer nothing to look at — and usually
-has plenty to find.
+different one: "does this still work". A script can go a year without an edit
+while everything around it moves — dependency versions, the shape of its input,
+the services next to it, the limits of the host it runs on. The debt
+accumulates and there are no commits carrying it, so a diff reviewer has
+nothing to show. The only way to see it is to take the code and run today's
+inputs through it.
 
 **`audit` runs in one session and spawns no subagents.** Diff reviewers usually
 split the work across parallel agents; this one does not, because every spawn
