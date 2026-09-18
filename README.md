@@ -93,11 +93,14 @@ goes first, and whose reproductions to re-run afterwards. It also says what
 stays broken meanwhile: the worst finding usually has to go last, because
 everything else would otherwise be re-applied to rewritten code.
 
-## The file is a work order, handed to whoever fixes
+## The file is an audit another session decides from
 
-The pass and the repair are done by different sessions on purpose, and the file
-is what passes between them. Hand it to another assistant, or to the same one in
-a fresh session:
+It is not a memo and not a report to read through. It is the input to the next
+step: another LLM, or a fresh session of this one, reads the file and decides
+from it what to change — in the code, in the layout, in the configuration. The
+pass and the repair are done by different sessions on purpose, and the file
+carries everything the decision needs. Hand it to another assistant, or to the
+same one in a fresh session:
 
 ```
 Work through review-2026-09-18-mytool.md. Reproduce each item before fixing it,

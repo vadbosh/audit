@@ -13,6 +13,13 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.16
+
+- **"A work order handed to whoever fixes" understated what the file is for.**
+  It is the input to a decision, taken by another LLM or a fresh session: what
+  to change in the code, in the layout, in the configuration. Both READMEs say
+  that first now, before the sentence to paste.
+
 ## 1.0.15
 
 - **"The size at which that number starts to hurt" — hurt whom.** The cost
