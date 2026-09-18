@@ -9,9 +9,9 @@ tree, a set of documents. Findings go to one file,
 What it is **not**: a vulnerability scan, a style pass, a review of a diff. Four
 questions, in this order:
 
-1. **Does it do what it promises?** Fed the inputs its author did not have in
-   mind — another syntax, a value crossing a line break, a limit reached — does
-   it still answer correctly, or does it answer wrongly and say nothing?
+1. **Does it do what it promises?** The author tested the inputs they had in
+   mind. Give it another syntax, a value split across a line break, a limit
+   reached: does the answer stay right, or go wrong in silence?
 2. **Does its documentation describe the code that is there?** A README
    promising a behaviour the code lost two releases ago is worse than no README:
    it is what somebody checks before deciding not to look further.
@@ -42,13 +42,11 @@ skill:  Using audit on bin/mytool — findings go to review-2026-09-18-mytool.md
 | a pull request, a branch to merge, a diff | whatever reviews diffs in your assistant — those tools take the changed lines as their input |
 | a tool, a script, a config tree, a document set on disk | the `audit` skill |
 
-A diff reviewer answers "what did this change break". `audit` answers a
-different one: "does this still work". A script can go a year without an edit
-while everything around it moves — dependency versions, the shape of its input,
-the services next to it, the limits of the host it runs on. The debt
-accumulates and there are no commits carrying it, so a diff reviewer has
-nothing to show. The only way to see it is to take the code and run today's
-inputs through it.
+A diff reviewer looks at what a change broke. `audit` looks at whether the code
+still works. Code sits unchanged for a year while everything around it moves:
+library versions, input formats, neighbouring services, host limits. No commits,
+so a diff reviewer has nothing to look at. The debt is there anyway. One way to
+find it: run today's inputs through the code.
 
 **`audit` runs in one session and spawns no subagents.** Diff reviewers usually
 split the work across parallel agents; this one does not, because every spawn
@@ -92,17 +90,16 @@ Work through review-2026-09-18-mytool.md. Reproduce each item before fixing it,
 in the order the file gives, and run the acceptance commands at the end.
 ```
 
-Nothing else has to travel with it. Each item carries the command that
-reproduces the defect, the fix stated as a change rather than an intention, the
-files that change together, and the test that closes it; the file as a whole
-carries the invariants a fix may not break, the order the items must be done in,
-and the acceptance commands with the exit status each should return. A fixer who
-was not in the reviewing session needs none of its context.
+Nothing else has to travel with it. Each item carries four things: the command
+that reproduces the defect; the fix stated as a change, not an intention; the
+files that change together; the test that closes it. The file as a whole carries
+the invariants, the order of the items, and the acceptance commands with their
+exit codes. A fixer needs none of the reviewing session's context.
 
 That separation is the point, not a limitation. A session that reviewed the code
-already believes its own reading of it; a session that only has the file has to
-reproduce each claim before acting on it — which is exactly what the file asks
-for in its second line.
+already believes its own reading of it. A session holding only the file has to
+reproduce every claim first — which is what the file asks for in its second
+line.
 
 ## The rules it holds itself to
 

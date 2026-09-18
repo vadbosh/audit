@@ -13,6 +13,13 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.13
+
+- **Shorter sentences, same facts.** The Russian version had one of 47 words and
+  one of 34; both were lists joined by semicolons where a colon and four items
+  say it faster. Measured after: longest sentence 31 words, average 17. The
+  English side got the same treatment where it had grown past 40.
+
 ## 1.0.12
 
 - **Why a diff reviewer has nothing to show, said plainly.** The old wording —
