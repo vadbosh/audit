@@ -13,6 +13,17 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.17
+
+- **The fourth question was a label with nothing behind it.** "Which decisions
+  are worth questioning — named as proposals, never as tasks" says what the
+  section is called and not what goes in it. Now it says these are not defects
+  at all: the code does what it was meant to and the intent is what is
+  arguable, with three shapes that recur — an allowlist where everything
+  unnamed passes, a fixed list of labels that grows only after an incident,
+  failing open until it is the hole — and why the author decides: they pay the
+  price and know why it ended up that way.
+
 ## 1.0.16
 
 - **"A work order handed to whoever fixes" understated what the file is for.**
