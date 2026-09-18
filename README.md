@@ -15,21 +15,23 @@ skill:  Using audit on bin/mytool — findings go to review-2026-09-18-mytool.md
         A: 7, B: 3, C: 4, D: 4 open questions. Nothing was fixed.
 ```
 
-## When `audit`, and when a pull-request reviewer
+## When `audit`, and when a diff reviewer
 
 | Situation | Use |
 |---|---|
-| a pull request, a branch to merge, a diff | the `code-review` plugin from the Claude Code marketplace, and its equivalents — they are built on `gh pr diff` |
+| a pull request, a branch to merge, a diff | whatever reviews diffs in your assistant — those tools take the changed lines as their input |
 | a tool, a script, a config tree, a document set on disk | the `audit` skill |
 
-The `code-review` plugin spawns three Haiku agents, five Sonnet reviewers and
-one more agent per finding, every run. On a diff with owners and history that
-price is worth paying; but the plugin has no input at all when there is no pull
-request, which is the ordinary case for a personal tool.
+A diff reviewer compares what a change became against what it replaced, which
+is a different question from whether the thing works at all. It also has no
+input when nothing has changed — the ordinary state of a tool somebody wrote
+once and has used ever since.
 
-**`audit` runs in one session and spawns no subagents.** If the object is big
-enough that a pass would need parallel agents, the skill reviews one part of it
-and says which part in its opening line.
+**`audit` runs in one session and spawns no subagents.** Diff reviewers usually
+split the work across parallel agents; this one does not, because every spawn
+loads its context from nothing. If the object is big enough that a pass would
+need parallel agents, the skill reviews one part of it and says which part in
+its opening line.
 
 ## What a pass produces
 

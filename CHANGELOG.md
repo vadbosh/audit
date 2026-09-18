@@ -13,6 +13,21 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.3
+
+- **The skill defined itself by a plugin that exists in one assistant.** It
+  ships into Claude Code, Opencode and Codex, and told all three to reach for
+  `code-review` instead when the input is a diff — a Claude Code marketplace
+  package, absent from the other two and not portable to them: the marketplaces
+  are separate install systems, the agent-per-model pinning it is built on does
+  not survive the port, and its input comes from `gh pr diff`.
+
+  The distinction that matters was never the product, it is the input. A diff
+  reviewer compares what a change became against what it replaced; this pass
+  asks whether the thing works, and needs nothing to have changed. Said that
+  way in the skill and both READMEs, with no product named anywhere in what
+  ships.
+
 ## 1.0.2
 
 - **The comparison section named no one.** "Pull-request reviewers spawn several

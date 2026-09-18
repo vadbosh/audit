@@ -1,7 +1,7 @@
 ---
 name: audit
-description: Review a tool, script, config set or document set that already exists on disk, and write the findings to review-YYYY-MM-DD-<object>.md. Handles "сделай ревью", "пройдись по коду", "cold review", "проверь этот инструмент целиком", "audit this", and additions to a review that exists — "допиши в ревью", "добавь пункт", "add this finding to the review". Each finding carries the command that reproduces it. One session, no agent fan-out. Not for a pull request diff — that is the code-review plugin.
-version: "1.0.2"
+description: Review a tool, script, config set or document set that already exists on disk, and write the findings to review-YYYY-MM-DD-<object>.md. Handles "сделай ревью", "пройдись по коду", "cold review", "проверь этот инструмент целиком", "audit this", and additions to a review that exists — "допиши в ревью", "добавь пункт", "add this finding to the review". Each finding carries the command that reproduces it. One session, no agent fan-out. Not for a pull request or a diff — those have reviewers of their own, built on the diff.
+version: "1.0.3"
 ---
 
 # audit
@@ -15,20 +15,22 @@ fix its first finding stops looking for the rest, and never reaches a third one.
 review-\<date\>-\<object\>.md." Name the file in full: it is the one line that
 lets the person stop a pass aimed at the wrong thing before it costs anything.
 
-## When this, and when the other one
+## When this, and when a diff reviewer
 
 | Situation | Use |
 |---|---|
-| a pull request, a diff, a branch to merge | the `code-review` plugin — it is built on `gh pr diff` |
+| a pull request, a branch to merge, a diff | whatever reviews diffs here — those tools take the changed lines as their input |
 | a tool, a script, a config tree, a document set sitting on disk | this |
 
-The plugin spawns three Haiku agents, five Sonnet reviewers and one more agent
-per finding. That shape earns its cost on a diff with owners and history. It has
-no input at all when there is no pull request, which is the ordinary case for a
-personal tool.
+A diff reviewer reads what changed against what it replaced, which is a
+different question from whether the thing works. It also has no input at all
+when nothing has changed — the ordinary case for a tool somebody wrote once and
+has been using since.
 
-**Cost of this skill: one session, no subagents.** If a pass seems to need a
-fan-out, the object is too big — review one part of it and say which part.
+**Cost of this skill: one session, no subagents.** Reviewers of the other kind
+usually split the work across parallel agents; this one does not, because every
+spawn loads its context from nothing. If a pass seems to need a fan-out, the
+object is too big — review one part of it and say which part.
 
 ## Choosing the object, in one exchange or none
 
