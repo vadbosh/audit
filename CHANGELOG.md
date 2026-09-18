@@ -13,6 +13,17 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.4
+
+- **The pass read one assistant's instruction file first.** `CLAUDE.md` was
+  named ahead of `AGENTS.md`, and the project's notes were described as
+  something `kb brief` prints — a tool that may not be installed. Both are now
+  stated by role: the root instruction file under whatever name this assistant
+  reads, and a notes directory read with whatever wrote it, or simply as files.
+  Nothing else in what ships assumed an assistant: no agent tool, no model
+  names, no `gh`. The commands the pass runs are `mktemp -d`, `git`, `ls`,
+  `diff`.
+
 ## 1.0.3
 
 - **The skill defined itself by a plugin that exists in one assistant.** It

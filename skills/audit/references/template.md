@@ -25,7 +25,7 @@ Baseline, run before anything was touched:
 
 ## How to work through this file
 
-1. Read <the project's own rules: CLAUDE.md / AGENTS.md / its notes> first.
+1. Read <the project's own rules — its root instruction file, its notes> first.
 2. Every item below has a reproduction. Reproduce on the broken input BEFORE
    fixing, then write the test, then fix.
 3. Order: A by importance, then B, then C. D only after the person agrees.

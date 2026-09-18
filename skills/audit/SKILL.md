@@ -1,7 +1,7 @@
 ---
 name: audit
 description: Review a tool, script, config set or document set that already exists on disk, and write the findings to review-YYYY-MM-DD-<object>.md. Handles "сделай ревью", "пройдись по коду", "cold review", "проверь этот инструмент целиком", "audit this", and additions to a review that exists — "допиши в ревью", "добавь пункт", "add this finding to the review". Each finding carries the command that reproduces it. One session, no agent fan-out. Not for a pull request or a diff — those have reviewers of their own, built on the diff.
-version: "1.0.3"
+version: "1.0.4"
 ---
 
 # audit
@@ -137,8 +137,11 @@ git -C <dir> log -1 --oneline # the commit the line numbers refer to
 <tool> --version              # what actually runs here
 ```
 
-Then read what the project says about itself — `CLAUDE.md`, `AGENTS.md`,
-`README`, and its work notes if it has them (`kb brief` when there is a `kb/`).
+Then read what the project says about itself: the instruction file at its root
+under whatever name this assistant reads — `AGENTS.md`, `CLAUDE.md`, or the
+equivalent — the `README`, and its work notes if it keeps any. A notes
+directory is read with whatever wrote it (`kb brief` for a `kb/`), or just
+read as files.
 A rule the author wrote down on purpose is not a finding. Contradicting one is.
 
 Run the project's own checks once, before touching anything, and put the result
