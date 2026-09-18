@@ -13,6 +13,15 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.21
+
+- **One table cell was carrying a five-part structure.** "what is broken: the
+  command that shows it; how bad — wrong in silence, broken loudly, damage done;
+  what changes together; what closes it" is a list wearing a cell as a disguise.
+  The cell now says what section A is — what is broken, and how to see it — and
+  the five parts are a list under the table, with the reason the silent case is
+  the worst: nobody noticed, so nobody will go and check.
+
 ## 1.0.20
 
 - **The table of sections read like a specification.** "what does the wrong

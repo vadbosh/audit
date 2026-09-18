@@ -87,12 +87,22 @@ One Markdown file, in sections named after consequences rather than topics:
 
 | Section | The question |
 |---|---|
-| **A. Defects** | what is broken: the command that shows it; how bad — wrong in silence, broken loudly, damage done; what changes together; what closes it |
+| **A. Defects** | what is broken, and how to see it |
 | **B. Documentation** | the README promises one thing, the code does another |
 | **C. Cost** | how much time and memory it eats — from a command's numbers, not by eye |
 | **D. Decisions** | what to leave alone, what is arguable — proposals for the author, not tasks |
 | **What is NOT a defect** | checked, and fine — so nobody checks it again |
 | **Done when** | the commands that prove it, and the exit code to expect from each |
+
+Every defect in section A is written the same way, in five lines:
+
+- **what is broken** — one sentence, no diagnosis;
+- **the command** that shows it, with its real output;
+- **how bad**: wrong in silence, broken loudly, or damage done. The first is the
+  worst — nobody noticed, so nobody will go and check;
+- **what to change** — every file that moves together: a port in another
+  language, a second copy of the same list, a test;
+- **what closes it** — a test that fails before the fix and passes after.
 
 Beyond the findings the file carries two lists, and without them nobody can
 work from it.
