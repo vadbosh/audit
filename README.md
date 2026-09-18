@@ -9,19 +9,35 @@ tree, a set of documents. Findings go to one file,
 What it is **not**: a vulnerability scan, a style pass, a review of a diff. Four
 questions, in this order:
 
-1. **Does it do what it promises?** The author tested the inputs they had in
-   mind. Give it another syntax, a value split across a line break, a limit
-   reached: does the answer stay right, or go wrong in silence?
-2. **Does its documentation describe the code that is there?** A README
-   promising a behaviour the code lost two releases ago is worse than no README:
-   it is what somebody checks before deciding not to look further.
-3. **What does it cost, and where does it stop working?** Not "could be
-   faster" — seconds and bytes from a command's output, plus the threshold
-   where the cost turns into a failure. From a real pass: a redactor spent
-   5.6 s per megabyte, and the host kills the hook calling it after 10 s, so
-   anything longer than two megabytes reached the reader unmasked.
-4. **Which of its decisions are worth questioning?** Named as proposals for the
-   author, never as tasks.
+1. **Does it work on what its author did not expect?**
+   The author tested the inputs they had in mind, and on those it is fine. The
+   audit hands it others: a key written in JSON rather than after an `=`; a
+   password with an `@` in the middle; a value split across a line break; a file
+   ten times the usual size. Then it looks at the result — is the answer still
+   right, or is it wrong with nothing said about it.
+
+2. **Does the documentation match the code?**
+   The README promises that the label `Authorization: Bearer` is recognised. The
+   code has no such label and never fires on it. That is worse than a README
+   saying nothing: somebody read it, believed it, and decided to look no
+   further. The audit reads the documentation and checks each promise with a
+   command.
+
+3. **What does it cost, and at what size does it stop working?**
+   Not "could be faster" — seconds and bytes printed by a command. A real case:
+   a redactor spent 5.6 seconds per megabyte, and the system kills the hook that
+   calls it after 10 seconds. So everything over two megabytes reached the
+   reader unmasked. Cost on its own is a remark; cost past the point where the
+   work stops happening is a defect.
+
+4. **Which decisions are worth discussing?**
+   These are not defects: the code does exactly what it was meant to — the
+   intent is what is arguable. Say the tool lists the commands allowed to read
+   secret files, and everything else passes unquestioned. Or the list of labels
+   like `password` and `token` is fixed, and a new one is added only after
+   something leaked. The author pays for such a choice and knows why it ended up
+   that way. So these arrive as proposals with the price named, and the author
+   decides.
 
 Every finding carries the command that reproduces it, run on the broken input.
 A finding without one is a guess, and guesses are cheap to write and expensive

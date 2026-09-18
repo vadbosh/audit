@@ -13,6 +13,17 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.18
+
+- **The four questions were labels, not explanations.** They named what a pass
+  asks and left the reader to imagine it. Each one now carries the case behind
+  it: a key written in JSON instead of after an `=`; a README promising the
+  label `Authorization: Bearer` the code never had; a redactor at 5.6 s per
+  megabyte behind a hook killed at 10 s; a tool whose allowlist lets everything
+  unnamed through. Question 4 in the English version had also missed the
+  previous release — the replacement silently did not apply, and the two
+  versions ran a release apart.
+
 ## 1.0.17
 
 - **The fourth question was a label with nothing behind it.** "Which decisions
