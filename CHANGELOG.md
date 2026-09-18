@@ -13,6 +13,16 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.11
+
+- **"The budget for care is spent on breadth" explained nothing**, and the
+  "three times as long" beside it was never measured. Both are replaced by the
+  mechanism: a pass fits in one session, and that session splits between reading
+  the code and feeding broken inputs through it. At five hundred lines there is
+  room for both; at fifteen hundred nearly all of it goes on reading, and items
+  arrive without reproductions — which is the one thing the pass exists to
+  produce. Said the same way in the skill and both READMEs.
+
 ## 1.0.10
 
 - **"Split along a seam" named a metaphor, not a part.** The rule for a large

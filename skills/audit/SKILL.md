@@ -1,7 +1,7 @@
 ---
 name: audit
 description: Review a tool, script, config set or document set that already exists on disk, and write the findings to review-YYYY-MM-DD-<object>.md. Handles "сделай ревью", "пройдись по коду", "cold review", "проверь этот инструмент целиком", "audit this", and additions to a review that exists — "допиши в ревью", "добавь пункт", "add this finding to the review". Each finding carries the command that reproduces it. One session, no agent fan-out. Not for a pull request or a diff — those have reviewers of their own, built on the diff.
-version: "1.0.10"
+version: "1.0.11"
 ---
 
 # audit
@@ -53,11 +53,18 @@ say which one you would take.
 One object per pass. Two objects in one file is two passes stapled together,
 and the second one is always the thinner.
 
-**Past roughly 600 lines of code, split the object and say how.** A pass over
-1200 lines takes three times as long as one over 400 and returns thinner items,
-because the budget for care is spent on breadth. The seams are already there:
-the main implementation and its port in another language; the library and the
-command that drives it; one subsystem of a tree. Take the primary one first.
+**Past roughly 600 lines of code, cut the object into segments, take one, and
+say which.** A segment is a part that can be reviewed on its own — its own
+inputs, its own checks. Most projects already have them marked: the main
+implementation and its port in another language; the library and the command
+that drives it; one subcommand of a CLI; one subsystem of a tree.
+
+The reason is the budget. A pass fits in one session, and that session splits
+between two jobs: reading the code, and feeding broken inputs through it. At
+five hundred lines there is room for both. At fifteen hundred nearly all of it
+goes on reading, and the items come out without reproductions — "this looks
+risky" instead of the command that shows it, which is the one thing this pass
+exists to produce. Take the primary segment first.
 A port then gets its own pass, and that pass starts as a parity check — the same
 inputs through both, the differences listed — which is cheaper and sharper than
 auditing it from nothing.

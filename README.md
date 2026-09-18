@@ -121,11 +121,13 @@ for in its second line.
   own: its own inputs, its own checks. Most projects already have them marked —
   the main implementation `bin/tool` and its port `bin/tool.ps1`; the library
   `lib/parse.py` and the command that drives it; one subcommand of a CLI with
-  its own flags; one subsystem of a configuration tree. A pass over 1200 lines
-  takes three times as long as one over 400 and returns smaller findings —
-  the attention goes on breadth. The port gets a pass of its own, and that one
-  starts as a parity check: the same inputs through both, the differences
-  listed.
+  its own flags; one subsystem of a configuration tree. The reason is that a
+  pass fits in one session, and that session's budget splits between two jobs:
+  reading the code, and feeding broken inputs through it. At five hundred lines
+  there is enough for both; at fifteen hundred nearly all of it goes on reading,
+  and items come out without a reproduction — "this looks risky" instead of the
+  command that shows it. The port gets a pass of its own, and that one starts as
+  a parity check: the same inputs through both, the differences listed.
 
 ## Install
 
