@@ -4,8 +4,9 @@ A skill for reviewing something that is **already written and sitting on disk** 
 a tool, a script, a configuration tree, a set of documents — and writing the
 findings to one file: `review-YYYY-MM-DD-<object>.md` at the project root.
 
-The skill fixes nothing. Reviewing and repairing are different jobs, and a pass that
-starts fixing stops looking at item three.
+The skill fixes nothing. Reviewing and repairing are different jobs: a pass that
+stops to fix its first finding stops looking for the rest, and never reaches a
+third one.
 
 ```
 you:    /audit bin/mytool

@@ -13,6 +13,14 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.1
+
+- **"stops looking at item three" named nothing.** The line explaining why the
+  pass does not fix came from an image in somebody's head: the third item of
+  what? Said plainly — a pass that stops to fix its first finding stops looking
+  for the rest, and never reaches a third one. Corrected in the skill, both
+  READMEs and the changelog section that carried it.
+
 ## 1.0.0
 
 First release as a repository of its own. The skill was written over one day
@@ -35,8 +43,9 @@ went wrong in a way worth writing down, not from an idea about reviewing.
   are indistinguishable in the text. Verdicts come from the exit status, a file
   the command wrote, or a byte count.
 
-- **The pass fixes nothing.** Reviewing and repairing are different jobs; a pass
-  that starts fixing stops looking at item three.
+- **The pass fixes nothing.** Reviewing and repairing are different jobs: a pass
+  that stops to fix its first finding stops looking for the rest, and never
+  reaches a third one.
 
 - **Findings are classed by consequence** — silent wrong result, visible
   failure, damage — and **slow enough is a defect**: when a limit turns

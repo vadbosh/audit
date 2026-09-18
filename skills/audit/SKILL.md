@@ -1,15 +1,15 @@
 ---
 name: audit
 description: Review a tool, script, config set or document set that already exists on disk, and write the findings to review-YYYY-MM-DD-<object>.md. Handles "сделай ревью", "пройдись по коду", "cold review", "проверь этот инструмент целиком", "audit this", and additions to a review that exists — "допиши в ревью", "добавь пункт", "add this finding to the review". Each finding carries the command that reproduces it. One session, no agent fan-out. Not for a pull request diff — that is the code-review plugin.
-version: "1.0.0"
+version: "1.0.1"
 ---
 
 # audit
 
 A pass over something that is already written, by a session that did not write
 it. Produces one file: `review-YYYY-MM-DD-<object>.md` at the project root. It does not
-fix anything — reviewing and repairing are different jobs, and a pass that
-starts fixing stops looking at item three.
+fix anything — reviewing and repairing are different jobs: a pass that stops to
+fix its first finding stops looking for the rest, and never reaches a third one.
 
 **Announce:** "Using audit on \<object\> — findings go to
 review-\<date\>-\<object\>.md." Name the file in full: it is the one line that
