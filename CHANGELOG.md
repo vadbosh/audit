@@ -13,6 +13,15 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.10
+
+- **"Split along a seam" named a metaphor, not a part.** The rule for a large
+  object now says it is cut into segments and one is taken, and says what a
+  segment is: a part that can be reviewed on its own, with its own inputs and
+  its own checks. Four examples of where projects already have them — an
+  implementation and its port, a library and the command that drives it, one
+  subcommand of a CLI, one subsystem of a configuration tree.
+
 ## 1.0.9
 
 - **Three passages restated an idea instead of carrying it.** "A diff reviewer

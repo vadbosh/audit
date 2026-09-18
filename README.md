@@ -116,12 +116,16 @@ for in its second line.
   it is new, so no probe script ever needs an `rm`.
 - **Stay inside the project.** Another project on this machine is not evidence
   about this one.
-- **One object per pass.** Past roughly 600 lines the object is split along a
-  seam already in it: `bin/tool` apart from its port `bin/tool.ps1`, a library
-  apart from the command that drives it. A pass over 1200 lines takes three
-  times as long as one over 400 and returns smaller findings, because the
-  attention goes on breadth. The port gets its own pass, and that one starts as
-  a parity check — the same inputs through both, the differences listed.
+- **One object per pass.** Past roughly 600 lines the object is cut into
+  segments and one is taken. A segment is a part that can be reviewed on its
+  own: its own inputs, its own checks. Most projects already have them marked —
+  the main implementation `bin/tool` and its port `bin/tool.ps1`; the library
+  `lib/parse.py` and the command that drives it; one subcommand of a CLI with
+  its own flags; one subsystem of a configuration tree. A pass over 1200 lines
+  takes three times as long as one over 400 and returns smaller findings —
+  the attention goes on breadth. The port gets a pass of its own, and that one
+  starts as a parity check: the same inputs through both, the differences
+  listed.
 
 ## Install
 
