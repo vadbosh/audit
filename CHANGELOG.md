@@ -13,6 +13,15 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.15
+
+- **"The size at which that number starts to hurt" — hurt whom.** The cost
+  question now asks where the cost stops being a cost: seconds and bytes from a
+  command, plus the threshold past which the thing simply does not happen. With
+  the case that produced the rule: a redactor at 5.6 s per megabyte behind a
+  hook the host kills at 10 s, so every output over two megabytes reached the
+  reader unmasked.
+
 ## 1.0.14
 
 - **"When `audit`, and when a diff reviewer" answered the wrong question.** It

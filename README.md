@@ -15,8 +15,11 @@ questions, in this order:
 2. **Does its documentation describe the code that is there?** A README
    promising a behaviour the code lost two releases ago is worse than no README:
    it is what somebody checks before deciding not to look further.
-3. **What does it cost, measured?** Not "could be faster" — a number a command
-   printed, and the size at which that number starts to hurt.
+3. **What does it cost, and where does it stop working?** Not "could be
+   faster" — seconds and bytes from a command's output, plus the threshold
+   where the cost turns into a failure. From a real pass: a redactor spent
+   5.6 s per megabyte, and the host kills the hook calling it after 10 s, so
+   anything longer than two megabytes reached the reader unmasked.
 4. **Which of its decisions are worth questioning?** Named as proposals for the
    author, never as tasks.
 
