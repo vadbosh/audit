@@ -1,10 +1,12 @@
 # audit
 
-A skill that audits something **already written and in use** — a tool, a script,
-a configuration tree, a set of documents — and writes the findings to one file:
-`review-YYYY-MM-DD-<object>.md` at the project root.
+A skill for auditing code: **correctness on unexpected input, documentation
+against the code, cost by measurement, decisions worth questioning**. The object
+is something already written and in use — a tool, a script, a configuration
+tree, a set of documents. Findings go to one file,
+`review-YYYY-MM-DD-<object>.md`, at the project root.
 
-**An audit of what, exactly.** Not security, not style, not a diff. Four
+What it is **not**: a vulnerability scan, a style pass, a review of a diff. Four
 questions, in this order:
 
 1. **Does it do what it promises?** Fed the inputs its author did not have in

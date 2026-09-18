@@ -13,6 +13,14 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.7
+
+- **The Russian opening was a translation, not a sentence.** "то, что уже
+  написано и лежит на диске" is how the English reads, and nobody says it in
+  Russian. Both versions now open by naming the thing — a skill for auditing
+  code — and the four areas it covers, before the object it takes and the file
+  it writes.
+
 ## 1.0.6
 
 - **Both READMEs said what the skill reviews and never what it asks.** "A skill
