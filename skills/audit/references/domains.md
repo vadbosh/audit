@@ -39,6 +39,13 @@ Shapes that get missed:
   that finds the value stops at the first character outside it
 - **several values on one line**: whatever counts them must count values, not
   matching lines
+- **the value glued to its flag, or after a colon.** A label rule is written as
+  "label, separator, value", and the separator is assumed. Four client idioms
+  in daily use have none: `mysql -p<password>`, `redis-cli -a <password>`,
+  `smbclient -U user%password`, `curl -u user:password`. Measured: ten idioms
+  probed, three missed. The fix has a trap of its own — `-p`, `-a` and `-u`
+  mean other things to other programs, so a rule for them is gated on the
+  command that owns the idiom, or it starts masking `ls -p` and `sort -u`
 - the same input through **every port and mode** the object has, since a second
   implementation drifts in silence unless something compares the two
 
