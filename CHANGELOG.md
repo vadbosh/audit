@@ -13,6 +13,22 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.1.0
+
+- **Auditing a document is a new section, and it is about running the document
+  rather than reading it.** Each claim becomes a command: a list of formats
+  becomes one synthetic value per row, a list of paths one invocation per path,
+  a sentence saying "X is denied, Y is allowed" two runs. The finding that
+  justifies the section is the second kind it produces — not "the text is wrong
+  about the code" but "the code is wrong and the text said what it should do".
+  Measured on two document pairs in one afternoon: both passes started as
+  documentation reviews and both ended as code fixes, because prose is not
+  tested and nobody re-reads a sentence after narrowing the implementation.
+- Three habits recorded with it: take only claims a command can settle; cover
+  what the document says is left alone as well as what it says is caught; and
+  re-check a substitution before believing it — a `*` replaced by a letter
+  produced ten false "not denied" rows in one pass.
+
 ## 1.0.23
 
 - Заголовок раздела о поводах для прогона назван предметом: «Когда это
