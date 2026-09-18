@@ -13,6 +13,19 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.5
+
+- **The review file came out named `review-2026-09-18-up.sh.md`.** Run against
+  `up.sh` in Opencode and in Codex, both named the file that way from the same
+  rule: it said the slug comes from "the file", and a filename carries its
+  extension. The slug now drops the path and the extension, with three examples
+  in the skill and two in the template.
+
+- Verified while finding it: the two reference pages load on demand in Opencode
+  and Codex exactly as in Claude Code — `references/template.md` and
+  `references/domains.md` were read at the moment the pass reached writing, in
+  both.
+
 ## 1.0.4
 
 - **The pass read one assistant's instruction file first.** `CLAUDE.md` was

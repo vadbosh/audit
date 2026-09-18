@@ -1,7 +1,7 @@
 ---
 name: audit
 description: Review a tool, script, config set or document set that already exists on disk, and write the findings to review-YYYY-MM-DD-<object>.md. Handles "сделай ревью", "пройдись по коду", "cold review", "проверь этот инструмент целиком", "audit this", and additions to a review that exists — "допиши в ревью", "добавь пункт", "add this finding to the review". Each finding carries the command that reproduces it. One session, no agent fan-out. Not for a pull request or a diff — those have reviewers of their own, built on the diff.
-version: "1.0.4"
+version: "1.0.5"
 ---
 
 # audit
@@ -278,7 +278,12 @@ start writing and not before. This page says what a pass is; that page says
 what the file looks like.
 
 **`review-YYYY-MM-DD-<object>.md`, always, at the project root.** The object
-slug comes from what was audited — the file, the directory, the subsystem. The
+slug comes from what was audited — the file, the directory, the subsystem —
+**without its path and without its extension**: `bin/secrets-redact.ps1` gives
+`secrets-redact-ps1`, `lib/patch_config.py` gives `patch_config`, `docs/`
+gives `docs`. Two assistants asked to name the file both produced
+`review-2026-09-18-up.sh.md` from `up.sh`, because the rule said "the file"
+and a filename carries its extension. The
 date alone was the name once and it was wrong twice over: one pass per object is
 the rule, so a directory collects several reviews, and a reader looking for the
 one about a particular thing should not have to open files to find it. Say the

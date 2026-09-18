@@ -13,8 +13,9 @@ slot, not the text to write.
 ```markdown
 # Review of <object> — a task for whoever fixes it
 
-<!-- filename: review-YYYY-MM-DD-<object>.md — always with the object slug,
-     one review per object, several of them per directory -->
+<!-- filename: review-YYYY-MM-DD-<object>.md — the object slug without its
+     path and without its extension (up.sh → up, lib/patch_config.py →
+     patch_config). One review per object, several of them per directory -->
 
 Date: <YYYY-MM-DD, from `date -Is`>. Object: <files, sizes, what they are>.
 Line numbers are as of commit <sha>. They will rot; anchor by name:
