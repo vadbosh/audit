@@ -19,14 +19,17 @@ skill:  Using audit on bin/mytool — findings go to review-2026-09-18-mytool.md
 
 | Situation | Use |
 |---|---|
-| a pull request, a branch to merge, a diff | a pull-request reviewer — they are built on `gh pr diff` |
-| a tool, a script, a config tree, a document set on disk | this |
+| a pull request, a branch to merge, a diff | the `code-review` plugin from the Claude Code marketplace, and its equivalents — they are built on `gh pr diff` |
+| a tool, a script, a config tree, a document set on disk | the `audit` skill |
 
-Pull-request reviewers spawn several agents in parallel per run. That earns its
-cost on a diff with owners and history; it has no input at all when there is no pull
-request, which is the ordinary case for a personal tool. **This skill is one
-session and no subagents.** If a pass seems to need parallel agents, the object
-is too big — review one part of it and say which part.
+The `code-review` plugin spawns three Haiku agents, five Sonnet reviewers and
+one more agent per finding, every run. On a diff with owners and history that
+price is worth paying; but the plugin has no input at all when there is no pull
+request, which is the ordinary case for a personal tool.
+
+**`audit` runs in one session and spawns no subagents.** If the object is big
+enough that a pass would need parallel agents, the skill reviews one part of it
+and says which part in its opening line.
 
 ## What a pass produces
 

@@ -13,6 +13,15 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.2
+
+- **The comparison section named no one.** "Pull-request reviewers spawn several
+  agents" — which reviewers, spawning how many? And the table answered "use:
+  this", where "this" is the thing the reader is deciding about. Both versions
+  now name the `code-review` plugin and its actual shape — three Haiku agents,
+  five Sonnet reviewers, one more per finding — and say that `audit` runs in one
+  session, splitting an object too big for that and saying which part it took.
+
 ## 1.0.1
 
 - **"stops looking at item three" named nothing.** The line explaining why the
