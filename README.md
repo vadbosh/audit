@@ -89,7 +89,7 @@ One Markdown file, in sections named after consequences rather than topics:
 |---|---|
 | **A. Defects** | what is broken, and how to see it |
 | **B. Documentation** | the README promises one thing, the code does another |
-| **C. Cost** | how much time and memory it eats — from a command's numbers, not by eye |
+| **C. Cost** | how much time and memory it consumes — from a command's numbers, not by eye |
 | **D. Decisions** | what to leave alone, what is arguable — proposals for the author, not tasks |
 | **What is NOT a defect** | checked, and fine — so nobody checks it again |
 | **Done when** | the commands that prove it, and the exit code to expect from each |

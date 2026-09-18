@@ -13,6 +13,11 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.0.22
+
+- "сколько ест времени и памяти" — a tool consumes, it does not eat. Same word
+  replaced on the English side.
+
 ## 1.0.21
 
 - **One table cell was carrying a five-part structure.** "what is broken: the

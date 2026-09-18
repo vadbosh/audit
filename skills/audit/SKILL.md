@@ -1,7 +1,7 @@
 ---
 name: audit
 description: Review a tool, script, config set or document set that already exists on disk, and write the findings to review-YYYY-MM-DD-<object>.md. Handles "сделай ревью", "пройдись по коду", "cold review", "проверь этот инструмент целиком", "audit this", and additions to a review that exists — "допиши в ревью", "добавь пункт", "add this finding to the review". Each finding carries the command that reproduces it. One session, no agent fan-out. Not for a pull request or a diff — those have reviewers of their own, built on the diff.
-version: "1.0.21"
+version: "1.0.22"
 ---
 
 # audit
