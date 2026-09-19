@@ -213,6 +213,16 @@ An ordinary pass pays for neither.
 `check` compares every installed copy against the source **file by file**, asking
 the source what it ships rather than trusting a list written by hand.
 
+## Sending a change
+
+Commit messages are written in English, body included. The history is the only
+place the reason for a change survives, and whoever can read the code can read
+the message. A message that quotes Russian — a heading being renamed, a word
+being replaced — keeps the quotation: there the Russian is the subject.
+
+The documentation itself is bilingual and stays that way: `README.md` and
+`README.RU.md` are edited as a pair.
+
 ## Russian
 
 [README.RU.md](README.RU.md).
