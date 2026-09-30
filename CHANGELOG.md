@@ -13,6 +13,19 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.1.2
+
+- **Both READMEs state the commit-message convention**: messages are written in
+  English, body included, and a message that quotes Russian keeps the
+  quotation, because there the Russian is the subject. The history is the only
+  place the reason for a change survives, and whoever can read the code can
+  read the message.
+- The commit carrying that section landed on 2026-09-19 and sat untagged until
+  2026-09-30, so `release.sh check` reported `HEAD: moved past v1.1.1` while
+  all four installed copies read `1.1.1`. Pushed and distributed is not the
+  same as named by a number — the check answers the second question, `git
+  status` only the first.
+
 ## 1.1.1
 
 - **The glued-flag family, in `references/domains.md`.** A label rule is written
