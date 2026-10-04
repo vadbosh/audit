@@ -13,6 +13,15 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.1.3
+
+- **`release.sh check` no longer flags harmless paths as leaks.** The pattern
+  `$HOME|/home/[a-z]|/Users/[a-z]` matched the placeholders `/home/user` and
+  `/Users/user`, `/root/…` written in prose about a path, and `/rootfs`. A
+  home directory now counts only when a name follows it, and the placeholders
+  are exempt. Found on the sibling repository docs-techwriter, whose copy of
+  the check refused its own release over `/root/…` in a sentence.
+
 ## 1.1.2
 
 - **Both READMEs state the commit-message convention**: messages are written in

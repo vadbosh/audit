@@ -74,7 +74,10 @@ copies() {
 # published skills on this machine before anything looked for them.
 shipped_leaks() {
     local hits
-    hits="$(grep -n -E "$HOME|/home/[a-z]|/Users/[a-z]" $(shipped_paths) 2>/dev/null || true)"
+    # A path continues with a name after the home directory: "/root/…" in
+    # prose, "/rootfs" and the placeholders /home/user and /Users/user are not
+    # leaks. The plain ERE flagged all four; $HOME is also quoted, not a regex.
+    hits="$(grep -n -P "\Q$HOME\E/[A-Za-z0-9._-]|/home/(?!user\b)[a-z]|/Users/(?!user\b)[a-z]" $(shipped_paths) 2>/dev/null || true)"
     if [ -n "$hits" ]; then
         echo "  shipped files:    a path of this machine is named in them:"
         echo "$hits" | sed 's/^/    /'
