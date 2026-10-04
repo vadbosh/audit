@@ -10,6 +10,11 @@
 # authoritative and nothing says which is right.
 set -uo pipefail
 
+# Not ${1/#$HOME/\~}: bash 3.2, the one macOS ships, keeps the backslash and
+# prints \~/.claude — measured in the bash:3.2 image.
+tilde() { case "$1" in "$HOME"*) printf '~%s' "${1#"$HOME"}" ;; *) printf '%s' "$1" ;; esac; }
+
+
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILL="$SRC/skills/audit/SKILL.md"
 LOG="$SRC/CHANGELOG.md"
@@ -53,7 +58,7 @@ copies() {
         [ "$iv" = "$v" ] && [ "$same" -eq 1 ] && continue
         [ "$behind" -eq 0 ] && echo "  installed copies behind the source:"
         behind=$((behind + 1))
-        echo "    ${d/#$HOME/\~}  version $iv$([ "$same" -eq 0 ] && echo ", content differs")"
+        echo "    $(tilde "$d")  version $iv$([ "$same" -eq 0 ] && echo ", content differs")"
     done < <(installed_dirs)
 
     if [ "$behind" -gt 0 ]; then
@@ -77,7 +82,9 @@ shipped_leaks() {
     # A path continues with a name after the home directory: "/root/…" in
     # prose, "/rootfs" and the placeholders /home/user and /Users/user are not
     # leaks. The plain ERE flagged all four; $HOME is also quoted, not a regex.
-    hits="$(grep -n -P "\Q$HOME\E/[A-Za-z0-9._-]|/home/(?!user\b)[a-z]|/Users/(?!user\b)[a-z]" $(shipped_paths) 2>/dev/null || true)"
+    # perl, not grep -P: the BSD grep of macOS has no -P, and with the error
+    # sent to /dev/null the check would report "nothing local" there.
+    hits="$(perl -ne 'print "$ARGV:$.:$_" if m{\Q$ENV{HOME}\E/[\w.-]|/home/(?!user\b)[a-z]|/Users/(?!user\b)[a-z]}; close ARGV if eof' $(shipped_paths) || true)"
     if [ -n "$hits" ]; then
         echo "  shipped files:    a path of this machine is named in them:"
         echo "$hits" | sed 's/^/    /'

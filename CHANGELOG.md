@@ -13,6 +13,15 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.1.5
+
+- **macOS: `install.sh` and `release.sh`: paths printed as `~/…` came out as `\~/…` under bash 3.2 — the `/bin/bash`
+  macOS still ships — because `${x/#$HOME/\~}` keeps the backslash before bash
+  4.3. A `tilde` function replaces it; measured in the `bash:3.2` image.**
+- **macOS: the leak check in `release.sh` would have passed without looking.**
+  It ran `grep -P`, absent from the BSD grep of macOS, with the error sent to
+  `/dev/null`. It uses `perl` now.
+
 ## 1.1.4
 
 - **README.RU.md reads as Russian in four more places**, found by a
