@@ -13,6 +13,15 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.1.4
+
+- **README.RU.md reads as Russian in four more places**, found by a
+  docs-techwriter review of the Russian READMEs: «хук падает в открытую
+  сторону», a calque of *fails open*, is «при сбое хук всё пропускает»; a
+  dangling «об этом»; «во второй своей строке», a pointer to a place instead of
+  what the file asks; «Долг накопился», a metaphor with nothing to point at. The
+  English README is unchanged.
+
 ## 1.1.3
 
 - **`release.sh check` no longer flags harmless paths as leaks.** The pattern
