@@ -9,8 +9,9 @@ no runtime. Installing it is a copy into each assistant's skills directory.
     .\install.ps1 -SkillsDir D    install into D instead of auto-detecting
 
 Idempotent: re-running replaces only what changed. A file it overwrites is
-copied to <file>.bak.<timestamp> ONLY when that content is not already in the
-source repository — a hand edit is the one thing git cannot give back.
+copied to %LOCALAPPDATA%\audit-backups ONLY when that content is not already
+in the source repository — a hand edit is the one thing git cannot give back.
+Never beside the file; the three newest copies are kept.
 Nothing outside $HOME is touched.
 #>
 [CmdletBinding()]
@@ -22,6 +23,23 @@ param(
 $ErrorActionPreference = 'Stop'
 $Src   = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+
+# A copy goes to $BackupDir, never beside the file: a backup left in a skills
+# directory loads as part of the skill. Named by the path below the profile
+# with \ turned into _, the three newest kept per file.
+$BackupDir = if ($env:AUDIT_BACKUP_DIR) { $env:AUDIT_BACKUP_DIR }
+             elseif ($env:LOCALAPPDATA) { Join-Path $env:LOCALAPPDATA 'audit-backups' }
+             else { Join-Path $HOME '.local/state/audit-backups' }
+function Backup-File ([string]$Path) {
+    New-Item -ItemType Directory -Force -Path $BackupDir | Out-Null
+    $full = [System.IO.Path]::GetFullPath($Path)
+    $rel  = if ($full.StartsWith("$HOME$([IO.Path]::DirectorySeparatorChar)", [StringComparison]::OrdinalIgnoreCase)) {
+                $full.Substring($HOME.Length + 1) } else { $full -replace '^([A-Za-z]:)?[\\/]', '' }
+    $name = $rel -replace '[\\/]', '_'
+    Copy-Item -LiteralPath $Path -Destination (Join-Path $BackupDir "$name.bak.$Stamp") -Force
+    Get-ChildItem -Force -LiteralPath $BackupDir -Filter "$name.bak.*" |
+        Sort-Object Name -Descending | Select-Object -Skip 3 | Remove-Item -Force
+}
 $Home_ = $env:USERPROFILE
 
 function Say  { param($m) Write-Host $m }
@@ -54,8 +72,8 @@ function Install-File {
         if (In-GitHistory $To) {
             Say "    ~ $(Tilde $To)"
         } else {
-            Copy-Item $To "$To.bak.$Stamp"
-            Say "    ~ $(Tilde $To)  (backup .bak.$Stamp — edited by hand, not in git)"
+            Backup-File $To
+            Say "    ~ $(Tilde $To)  (backup in $(Tilde $BackupDir) — edited by hand, not in git)"
         }
     } else {
         Say "    + $(Tilde $To)"

@@ -9,13 +9,32 @@
 #   ./install.sh --skills-dir D  install into D instead of auto-detecting
 #
 # Idempotent: re-running replaces only what changed. A file it overwrites is
-# copied to <file>.bak.<timestamp> ONLY when that content is not already in the
-# source repository — a hand edit is the one thing git cannot give back.
+# copied to ~/.local/state/audit-backups ONLY when that content is not
+# already in the source repository — a hand edit is the one thing git cannot
+# give back. Never beside the file; the three newest copies are kept.
 # Nothing outside $HOME is touched.
 set -euo pipefail
 
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 STAMP="$(date +%Y%m%d-%H%M%S)"
+BACKUP_DIR="${AUDIT_BACKUP_DIR:-${XDG_STATE_HOME:-$HOME/.local/state}/audit-backups}"
+
+# A copy goes to $BACKUP_DIR, never beside the file: a backup left in a skills
+# directory or on PATH loads or runs as part of what it copies. Named by the
+# path below $HOME with / turned into _, the three newest kept per file.
+backup_file() {
+    local dst="$1" name old n=0
+    name="${dst#"$HOME"/}"
+    name="${name//\//_}"
+    mkdir -p "$BACKUP_DIR"
+    chmod 700 "$BACKUP_DIR"
+    cp -p "$dst" "$BACKUP_DIR/$name.bak.$STAMP"
+    printf '%s\n' "$BACKUP_DIR/$name".bak.* | sort -r | while IFS= read -r old; do
+        n=$((n + 1))
+        if [ "$n" -gt 3 ]; then rm -f "$old"; fi
+    done
+    return 0
+}
 
 DRY_RUN=0
 SKILLS_DIR=""
@@ -68,8 +87,8 @@ install_file() {
         if in_git_history "$dst"; then
             say "    ~ $(tilde "$dst")"
         else
-            cp -p "$dst" "$dst.bak.$STAMP"
-            say "    ~ $(tilde "$dst")  (backup .bak.$STAMP — edited by hand, not in git)"
+            backup_file "$dst"
+            say "    ~ $(tilde "$dst")  (backup in $(tilde "$BACKUP_DIR") — edited by hand, not in git)"
         fi
     else
         say "    + $(tilde "$dst")"

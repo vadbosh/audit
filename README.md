@@ -183,7 +183,9 @@ Windows: `.\install.ps1`, same flags.
 The skill is three Markdown files. There is no binary, nothing goes on `PATH`,
 and nothing outside `$HOME` is touched. Re-running replaces only what changed; a
 file it overwrites is backed up only when that exact content is not already in
-this repository — a hand edit is the one thing git cannot give back.
+this repository — a hand edit is the one thing git cannot give back. The copy
+goes to `~/.local/state/audit-backups` (on Windows `%LOCALAPPDATA%\audit-backups`),
+never beside the file, and the three newest copies of each file are kept.
 
 Uninstall: delete `<skills-dir>/audit`.
 

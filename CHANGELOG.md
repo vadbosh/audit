@@ -13,6 +13,15 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.1.6
+
+- **A backup no longer sits beside the file it copies.** `install.sh` and
+  `install.ps1` put a hand-edited file they replace into
+  `~/.local/state/audit-backups` (on Windows `%LOCALAPPDATA%\audit-backups`),
+  named by its path below `$HOME`, the three newest per file kept. Beside the
+  file, in a skills directory, an assistant loaded the copy as part of the
+  skill.
+
 ## 1.1.5
 
 - **macOS: `install.sh` and `release.sh`: paths printed as `~/…` came out as `\~/…` under bash 3.2 — the `/bin/bash`
