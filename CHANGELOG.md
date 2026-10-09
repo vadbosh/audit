@@ -13,7 +13,7 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
-## Unreleased
+## 1.1.8
 
 - **Installers reject an empty skills directory and read the Opencode path from
   `~/.config/opencode`.** `install.sh --skills-dir` with no value or `''`, and
