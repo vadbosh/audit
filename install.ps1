@@ -24,6 +24,13 @@ $ErrorActionPreference = 'Stop'
 $Src   = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 
+# An empty value must not fall back to auto-detection: a wrapper passing an
+# unset variable would install into every assistant on the machine.
+if ($PSBoundParameters.ContainsKey('SkillsDir') -and -not $SkillsDir) {
+    Write-Host '-SkillsDir needs a path' -ForegroundColor Red
+    exit 2
+}
+
 # A copy goes to $BackupDir, never beside the file: a backup left in a skills
 # directory loads as part of the skill. Named by the path below the profile
 # with \ turned into _, the three newest kept per file.
@@ -40,7 +47,7 @@ function Backup-File ([string]$Path) {
     Get-ChildItem -Force -LiteralPath $BackupDir -Filter "$name.bak.*" |
         Sort-Object Name -Descending | Select-Object -Skip 3 | Remove-Item -Force
 }
-$Home_ = $env:USERPROFILE
+$Home_ = $HOME
 
 function Say  { param($m) Write-Host $m }
 function Ok   { param($m) Write-Host $m -ForegroundColor Green }
@@ -86,9 +93,9 @@ function Install-File {
 function Get-SkillDirs {
     if ($SkillsDir) { return @($SkillsDir) }
     $candidates = @(
-        (Join-Path $Home_ '.claude\skills'),
-        (Join-Path $env:APPDATA 'opencode\skills'),
-        (Join-Path $Home_ '.codex\skills')
+        (Join-Path (Join-Path $Home_ '.claude') 'skills'),
+        (Join-Path (Join-Path (Join-Path $Home_ '.config') 'opencode') 'skills'),
+        (Join-Path (Join-Path $Home_ '.codex') 'skills')
     )
     $candidates | Where-Object { Test-Path (Split-Path -Parent $_) }
 }

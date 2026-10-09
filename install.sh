@@ -41,7 +41,13 @@ SKILLS_DIR=""
 while [ $# -gt 0 ]; do
     case "$1" in
         --dry-run)    DRY_RUN=1 ;;
-        --skills-dir) SKILLS_DIR="${2:-}"; shift ;;
+        # An empty value must not fall back to auto-detection: a wrapper passing
+        # an unset variable would install into every assistant on the machine.
+        --skills-dir)
+            if [ $# -lt 2 ] || [ -z "$2" ]; then
+                echo "--skills-dir needs a path" >&2; exit 2
+            fi
+            SKILLS_DIR="$2"; shift ;;
         -h|--help)    sed -n '2,14p' "${BASH_SOURCE[0]}" | sed 's/^# \?//'; exit 0 ;;
         *) echo "unknown option: $1" >&2; exit 2 ;;
     esac

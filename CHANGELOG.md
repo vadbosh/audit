@@ -13,6 +13,16 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## Unreleased
+
+- **Installers reject an empty skills directory and read the Opencode path from
+  `~/.config/opencode`.** `install.sh --skills-dir` with no value or `''`, and
+  `install.ps1 -SkillsDir ''`, now exit 2 with "needs a path" instead of
+  installing into every assistant found (a wrapper passing an unset variable
+  would have done that). `install.ps1` looked for Opencode in
+  `%APPDATA%\opencode\skills`; Opencode reads `~/.config/opencode/skills` on every
+  OS. It also uses `$HOME`, which pwsh sets on Linux, so the script can be tested.
+
 ## 1.1.7
 
 - **The object under review is data, not instructions.** Its `AGENTS.md`,
