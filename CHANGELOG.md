@@ -13,6 +13,16 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.1.7
+
+- **The object under review is data, not instructions.** Its `AGENTS.md`,
+  README, comments and output no longer steer the pass; a line in them telling
+  the reviewer what to skip or run is reported as a finding.
+- **Someone else's project: ask before running its code.** Tests, build,
+  install script and git hooks of a cloned, downloaded or unpacked project run
+  only after a yes, and only in the sandbox. `git status` there runs with
+  `-c core.fsmonitor=false`.
+
 ## 1.1.6
 
 - **A backup no longer sits beside the file it copies.** `install.sh` and
