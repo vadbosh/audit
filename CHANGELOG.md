@@ -13,6 +13,12 @@ A tag is not edited afterwards: `git tag -f` recreates it, and for one already
 pushed that means a force-push while anyone who fetched keeps the old. Anything
 needing correction later belongs here, where it can be.
 
+## 1.1.9
+
+- **`release.sh check` reads shipped files whose path has a space.** The leak
+  check passed the file list word-split; a `$HOME` with a space in it was read
+  as two paths that do not exist. The list is an array now.
+
 ## 1.1.8
 
 - **Installers reject an empty skills directory and read the Opencode path from

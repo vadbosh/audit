@@ -78,13 +78,16 @@ copies() {
 # A machine path inside a shipped file reaches every clone. Three landed in
 # published skills on this machine before anything looked for them.
 shipped_leaks() {
-    local hits
+    local hits f files=()
+    # An array, not $(...) word-split: a $HOME with a space in it would be read
+    # as two paths, and the check would scan files that do not exist.
+    while read -r f; do files+=("$SRC/skills/audit/$f"); done < <(shipped)
     # A path continues with a name after the home directory: "/root/…" in
     # prose, "/rootfs" and the placeholders /home/user and /Users/user are not
     # leaks. The plain ERE flagged all four; $HOME is also quoted, not a regex.
     # perl, not grep -P: the BSD grep of macOS has no -P, and with the error
     # sent to /dev/null the check would report "nothing local" there.
-    hits="$(perl -ne 'print "$ARGV:$.:$_" if m{\Q$ENV{HOME}\E/[\w.-]|/home/(?!user\b)[a-z]|/Users/(?!user\b)[a-z]}; close ARGV if eof' $(shipped_paths) || true)"
+    hits="$(perl -ne 'print "$ARGV:$.:$_" if m{\Q$ENV{HOME}\E/[\w.-]|/home/(?!user\b)[a-z]|/Users/(?!user\b)[a-z]}; close ARGV if eof' "${files[@]}" || true)"
     if [ -n "$hits" ]; then
         echo "  shipped files:    a path of this machine is named in them:"
         echo "$hits" | sed 's/^/    /'
@@ -93,7 +96,6 @@ shipped_leaks() {
     echo "  shipped files:    nothing local named in them"
 }
 
-shipped_paths() { while read -r f; do printf '%s ' "$SRC/skills/audit/$f"; done < <(shipped); }
 
 check() {
     local v problems=0
